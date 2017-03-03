@@ -1,11 +1,11 @@
 (function(namespace) {
 	// start voice
-	var sound_min_level = 0.25;
 	
 	var max_level_L = 0;
 	var old_level_L = 0;
 	var cnvs = document.getElementById("test");
 	var cnvs_cntxt = cnvs.getContext("2d");
+
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -39,7 +39,11 @@
 				cnvs_cntxt.fillRect(10,10,(cnvs.width-20)*(instant_L/max_level_L),(cnvs.height-20)); // x,y,w,h
 				
 				var soundLevel = (instant_L);
+				
+				var sensity = document.getElementById('gain-sensity').value;
+				var sound_min_level = sensity / 100;
 				if(soundLevel >= sound_min_level){
+					//console.log(sound_min_level);
 					//$(document).trigger('mousedown');
 					var l = document.getElementById('space');				
 					for(var i=0; i<5; i++){
@@ -81,7 +85,7 @@
 			spaceRun();
 	}
 	function spaceRun(){
-		console.log('run');
+		//console.log('run');
 		spacePressed = true;
 		setTimeout(function(){ 
 			//console.log('stop');
