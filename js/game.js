@@ -1,5 +1,6 @@
 (function(namespace) {
 	// start voice
+	var sound_min_level = 0.25;
 	
 	var max_level_L = 0;
 	var old_level_L = 0;
@@ -38,7 +39,7 @@
 				cnvs_cntxt.fillRect(10,10,(cnvs.width-20)*(instant_L/max_level_L),(cnvs.height-20)); // x,y,w,h
 				
 				var soundLevel = (instant_L);
-				if(soundLevel > 0.3){
+				if(soundLevel >= sound_min_level){
 					//$(document).trigger('mousedown');
 					var l = document.getElementById('space');				
 					for(var i=0; i<5; i++){
@@ -60,7 +61,7 @@
 	var MAX_TIME_TICK = 1000 / 60;
 	var SCREEN_BUFFER = 50;
 	var GROUND_BUFFER = 10;
-	var SPACE_BAR_CODE = 32;
+	var SPACE_BAR_CODE = null;
 	var MIN_CACTUS_DISTANCE = 400;
 
 	var spacePressed = false;
@@ -77,14 +78,13 @@
     }
 	
 	function clickCustomDown(e){
-		
 			spaceRun();
 	}
 	function spaceRun(){
 		console.log('run');
 		spacePressed = true;
 		setTimeout(function(){ 
-			console.log('stop');
+			//console.log('stop');
 			spacePressed = false;
 		}, 400);
 	}
@@ -105,10 +105,16 @@
 		};
 	}
 
-	document.addEventListener('keydown', keydown, false);
-	document.addEventListener('keyup', keyup, false);
-	document.addEventListener('click', clickCustomDown, false);
-	//document.addEventListener('mousedown', clickCustomDown, false);
+	//document.addEventListener('keydown', keydown, false);
+	//document.addEventListener('keyup', keyup, false);
+	var lastMove = 0;
+	document.getElementById('space').addEventListener('click', function(){		
+		if(Date.now() - lastMove > 300) {
+			// Do stuff
+			spaceRun();
+			lastMove = Date.now();
+		} 
+	}, false);
 
 	function Game(options) {
 		this.canvas = options.el;
@@ -236,3 +242,11 @@
 
 	namespace.Game = Game;
 })(window);
+
+function reload(){	
+	new Game({
+		el: document.getElementById("game")
+	});	
+}
+var btn = document.getElementById('reload');
+btn.addEventListener("click", reload);
