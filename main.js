@@ -35,7 +35,7 @@
 				cnvs_cntxt.fillStyle = '#00ff00';
 				cnvs_cntxt.fillRect(10,10,(cnvs.width-20)*(instant_L/max_level_L),(cnvs.height-20)); // x,y,w,h
 				num.innerHTML = "";
-				num.innerHTML = instant_L;
+				num.innerHTML = (instant_L/max_level_L);
 				
 			}
 		},
