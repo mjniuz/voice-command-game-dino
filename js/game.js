@@ -40,7 +40,7 @@
 				var soundLevel = (instant_L/max_level_L);
 				if(soundLevel > 0.7){
 					//$(document).trigger('mousedown');
-					var l = document.getElementById('space');
+					var l = document.getElementById('space');				
 					for(var i=0; i<5; i++){
 					  l.click();
 					}
@@ -75,13 +75,39 @@
         }
     }
 	
-	function clickCustom(e){
+	function clickCustomDown(e){
+		
+			spaceRun();
+	}
+	function spaceRun(){
+		console.log('run');
 		spacePressed = true;
+		setTimeout(function(){ 
+			console.log('stop');
+			spacePressed = false;
+		}, 50);
+	}
+	
+	function clickCustom(e){
+		//console.log('run');
+		spacePressed = false;
+	}
+	
+	function throttle(func, milliseconds) {
+		var lastCall = 0;
+		return function () {
+			var now = Date.now();
+			if (lastCall + milliseconds < now) {
+				lastCall = now;
+				return func.apply(this, arguments);
+			}
+		};
 	}
 
 	document.addEventListener('keydown', keydown, false);
 	document.addEventListener('keyup', keyup, false);
-	document.addEventListener('click', clickCustom, false);
+	document.addEventListener('click', clickCustomDown, false);
+	//document.addEventListener('mousedown', clickCustomDown, false);
 
 	function Game(options) {
 		this.canvas = options.el;
