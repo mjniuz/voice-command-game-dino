@@ -38,7 +38,7 @@
 				cnvs_cntxt.fillRect(10,10,(cnvs.width-20)*(instant_L/max_level_L),(cnvs.height-20)); // x,y,w,h
 				
 				var soundLevel = (instant_L);
-				if(soundLevel > 0.3){
+				if(soundLevel > 0.288){
 					//$(document).trigger('mousedown');
 					var l = document.getElementById('space');				
 					for(var i=0; i<5; i++){
