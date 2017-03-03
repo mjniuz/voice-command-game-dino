@@ -37,12 +37,13 @@
 				cnvs_cntxt.fillStyle = '#00ff00';
 				cnvs_cntxt.fillRect(10,10,(cnvs.width-20)*(instant_L/max_level_L),(cnvs.height-20)); // x,y,w,h
 				
-				var soundLevel = (instant_L/max_level_L);
-				if(soundLevel > 0.9){
+				var soundLevel = (instant_L);
+				if(soundLevel > 0.3){
 					//$(document).trigger('mousedown');
 					var l = document.getElementById('space');				
 					for(var i=0; i<5; i++){
 					  l.click();
+					  return false;
 					}
 				}				
 				
@@ -85,7 +86,7 @@
 		setTimeout(function(){ 
 			console.log('stop');
 			spacePressed = false;
-		}, 50);
+		}, 400);
 	}
 	
 	function clickCustom(e){
